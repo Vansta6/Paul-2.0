@@ -1,0 +1,4 @@
+create new brain: false
+run paul: true
+smartness: 10
+query seek: 20
