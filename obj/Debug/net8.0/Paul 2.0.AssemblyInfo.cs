@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Paul 2.0")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+db66a023055151d4f8e3fa4817ae9f18c463889b")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+25d1de0ffc6c8e42d6448bd412a1a8ad5992e567")]
 [assembly: System.Reflection.AssemblyProductAttribute("Paul 2.0")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Paul 2.0")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

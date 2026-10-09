@@ -45,12 +45,12 @@ namespace Paul_2._0
             string dataPath = Path.Combine(basePath, @"data\Data.txt");
             string savePath = Path.Combine(basePath, @"data\save");
             string saveconfigPath = Path.Combine(basePath, @"data\configsave");
-            string data = File.ReadAllText(dataPath);
+            string data = File.ReadAllText(savePath);
             string savedata = File.ReadAllText(dataPath);
             string saveconfigdata = File.ReadAllText(saveconfigPath); //i hate my life
 
 
-
+            //Console.WriteLine(savedata);
             if (savedata != data || saveconfigdata != File.ReadAllText(configPath)) //detects changes to data or config
             {
                 Console.WriteLine("New data detected... Reconstructing brain");
