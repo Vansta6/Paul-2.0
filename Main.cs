@@ -11,7 +11,7 @@ namespace Paul_2._0
             string basePath = AppContext.BaseDirectory;
             if (basePath.Contains("bin") || basePath.Contains("build"))
                 basePath = Path.GetFullPath(Path.Combine(basePath, @"..\..\..")); //remove \bin\debug\
-
+            Console.WriteLine(basePath);
             string configPath = Path.Combine(basePath, "Config.txt");
             string[] config = File.ReadAllLines(configPath);
             Dictionary<string, string> settings = new Dictionary<string, string>();
