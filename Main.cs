@@ -9,7 +9,7 @@ namespace Paul_2._0
         static void Main(string[] args) //TODO: make it so these scripts are easy to alternate which is running
         {
             string basePath = AppContext.BaseDirectory;
-            if (basePath.Contains("bin"))
+            if (basePath.Contains("bin") || basePath.Contains("build"))
                 basePath = Path.GetFullPath(Path.Combine(basePath, @"..\..\..")); //remove \bin\debug\
 
             string configPath = Path.Combine(basePath, "Config.txt");

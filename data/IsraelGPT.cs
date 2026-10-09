@@ -10,7 +10,7 @@ namespace Paul_2._0
         static public string Run(string query, float endChance = 0.5f)
         {
             string basePath = AppContext.BaseDirectory;
-            if (basePath.Contains("bin"))
+            if (basePath.Contains("bin") || basePath.Contains("build"))
                 basePath = Path.GetFullPath(Path.Combine(basePath, @"..\..\..")); //remove \bin\debug\
 
 

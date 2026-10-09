@@ -28,7 +28,7 @@ namespace Paul_2._0
         static public void Run(int smartness, int memory)
         {
             string basePath = AppContext.BaseDirectory;
-            if (basePath.Contains("bin")) 
+            if (basePath.Contains("bin") || basePath.Contains("build")) 
                 basePath = Path.GetFullPath(Path.Combine(basePath, @"..\..\..")); //remove \bin\debug\
             string dataPath = Path.Combine(basePath, @"data\Data.txt");
             string[] data = File.ReadAllLines(dataPath);
