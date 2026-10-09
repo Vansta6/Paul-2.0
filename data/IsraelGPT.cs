@@ -7,7 +7,7 @@ namespace Paul_2._0
 {
     internal class IsraelGPT
     {
-        static public string Run(string query, float endChance = 0.5f)
+        static public string Run(string query, float endChance, int fastmode)
         {
             string basePath = AppContext.BaseDirectory;
             if (basePath.Contains("bin") || basePath.Contains("build"))
@@ -53,7 +53,8 @@ namespace Paul_2._0
 
                             minDist = levenDist;
                             simStrings.Add(s);
-                            Console.WriteLine($"simstring: {s}, ({paul.starts[s][0]}), levenDist: {levenDist}");
+                            if(fastmode == 0)
+                                Console.WriteLine($"simstring: {s}, ({paul.starts[s][0]}), levenDist: {levenDist}");
                         }
                     }
                     query = simStrings[rand.Next(0, simStrings.Count - 1)];
@@ -73,7 +74,8 @@ namespace Paul_2._0
                 string key = output.Substring(i, paul.Combobulation);
                 if(!paul.brain.ContainsKey(key)) //if key not in brain, replace key with most similar existing key
                 {
-                    Console.WriteLine("brain does not contain key: " + key);
+                    if (fastmode == 0)
+                        Console.WriteLine("brain does not contain key: " + key);
                     int minDist = int.MaxValue;
                     List<string> simStrings = new List<string>();
                     foreach(string s in paul.brain.Keys)
@@ -91,18 +93,19 @@ namespace Paul_2._0
                         }
                     }
                     key = simStrings[rand.Next(0, simStrings.Count-1)]; //replace key with any of the most similar strings to it
-                    Console.WriteLine("found key: " + key + " : " + paul.brain[key][0]);
+                    if (fastmode == 0)
+                        Console.WriteLine("found key: " + key + " : " + paul.brain[key][0]);
                 }
 
                 string nextchar = paul.brain[key][rand.Next(0, paul.brain[key].Count - 1)];
-
-                Console.WriteLine("text: " + output + "\nadding: " + nextchar);
+                if (fastmode == 0)
+                    Console.WriteLine("text: " + output + "\nadding: " + nextchar);
                 output += nextchar;
                 i++;
 
                 if (nextchar == ".")
                 {
-                    if(rand.Next(0, 1000) > endChance*1000) is_done = true; //half the time end it when adding a period
+                    if(rand.Next(0, 1000) > endChance*1000) is_done = true; //x% end it when adding a period
                     //output += ' ';
                 }
             }

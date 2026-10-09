@@ -65,7 +65,7 @@ namespace Paul_2._0
                 Console.Write("Enter your query, or enter nothing for no query: ");
                 string query = "";
                 query = Console.ReadLine();
-                IsraelGPT.Run(query, endChance);
+                IsraelGPT.Run(query, endChance, int.Parse(settings["fast paul"]));
             }
 
 
