@@ -60,11 +60,11 @@ namespace Paul_2._0
 
                 }
 
-                output = paul.starts[query][rand.Next(0, paul.starts[query].Count - 1)];
+                output = paul.starts[query][rand.Next(0, paul.starts[query].Count)];
             }
             else
             {
-                string value = paul.brain.Keys.ToArray()[rand.Next(0, paul.brain.Keys.Count - 1)];
+                string value = paul.brain.Keys.ToArray()[rand.Next(0, paul.brain.Keys.Count)];
                 output = value;
             }
 
