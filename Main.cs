@@ -42,11 +42,12 @@ namespace Paul_2._0
             int seek = int.Parse(settings["query seek"]);
             float endChance = float.Parse(settings["end chance"]);
 
+
             string dataPath = Path.Combine(basePath, @"data\Data.txt");
             string savePath = Path.Combine(basePath, @"data\save");
             string saveconfigPath = Path.Combine(basePath, @"data\configsave");
             string data = File.ReadAllText(savePath);
-            string savedata = File.ReadAllText(dataPath);
+            string savedata = File.ReadAllText(dataPath); //i hate my life again
             string saveconfigdata = File.ReadAllText(saveconfigPath); //i hate my life
 
 
@@ -55,7 +56,7 @@ namespace Paul_2._0
             {
                 Console.WriteLine("New data detected... Reconstructing brain");
                 Thread.Sleep(1000);
-                Brain_Constructor.Run(smartness, seek);
+                Brain_Constructor.Run(smartness, seek, int.Parse(settings["fast paul"]));
                 Console.WriteLine("-----DONE-----");
             }
 

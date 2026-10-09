@@ -25,7 +25,7 @@ namespace Paul_2._0
 
     public class Brain_Constructor
     {
-        static public void Run(int smartness, int memory)
+        static public void Run(int smartness, int memory, int fast)
         {
             string basePath = AppContext.BaseDirectory;
             if (basePath.Contains("bin") || basePath.Contains("build")) 
@@ -66,7 +66,7 @@ namespace Paul_2._0
             }
 
 
-
+            //seperate question and answer
             for(int i = 0; i < questions.Count; i++)
             {
                 int start = Math.Max(answers[i].Length - 1 - paul.StartSeek, 0);
@@ -81,11 +81,11 @@ namespace Paul_2._0
                 else
                     paul.starts.Add(question, new List<string>() { answer });
 
-                Console.WriteLine("question: " + question + ": " + string.Join(", ", paul.starts[question]));
+                if (fast == 0) 
+                    Console.WriteLine("question: " + question + ": " + string.Join(", ", paul.starts[question]));
             }
 
-
-
+            //process text into chars
             text = text.Concat(answers).ToList();
             for (int i = 0; i < text.Count; i++)
             {
@@ -94,6 +94,7 @@ namespace Paul_2._0
                     string key = text[i].Substring(x, paul.Combobulation);
                     string nextChar = text[i].Substring(x + paul.Combobulation, 1);
 
+                    //creat new list if there isnt a prexisting one
                     if(paul.brain.ContainsKey(key))
                         paul.brain[key].Add(nextChar);
                     else
@@ -106,7 +107,8 @@ namespace Paul_2._0
             
             foreach (string key in paul.brain.Keys)
             {
-                Console.WriteLine(key +  ": " + string.Join(", ", paul.brain[key]));
+                if (fast == 0)
+                    Console.WriteLine(key +  ": " + string.Join(", ", paul.brain[key]));
             }
             using FileStream createStream = File.Create(Path.Combine(basePath, @"data\brain.json"));
             JsonSerializer.Serialize(createStream, paul);
