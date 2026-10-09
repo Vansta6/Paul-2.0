@@ -5,8 +5,7 @@ If it does not work, install .NET 8.0 or higher.
 To add data, go into the data folder and add text to the data.txt. Dont mess around with anything else in that folder
 To customize your paul, simply change the values in the Config.txt
 	smartness refers to the characters it can hold in "memory"
-	dont worry about query seek you cant use that yet cause i hate you
-	set create brain to true if you have just changed the data.txt file to generate a new brain.json
-	set run paul to true if you arent an idiot.
+	query seek is how many characters from a query paul can actually see, starts at end and works backwards.
+	stop chance refers to the chance a period will end a response.
 
 Have fun.

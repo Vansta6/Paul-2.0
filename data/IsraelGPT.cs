@@ -7,7 +7,7 @@ namespace Paul_2._0
 {
     internal class IsraelGPT
     {
-        static public string Run()
+        static public string Run(string query, float endChance = 0.5f)
         {
             string basePath = AppContext.BaseDirectory;
             if (basePath.Contains("bin"))
@@ -31,7 +31,7 @@ namespace Paul_2._0
             int i = 0;
 
 
-            string query = ""; //TODO: make a way to make this not hard coded
+
             if (query != "")
             {
                 query = Regex.Replace(query, "[^a-zA-Z0-9 ]", "");
@@ -73,7 +73,7 @@ namespace Paul_2._0
                 string key = output.Substring(i, paul.Combobulation);
                 if(!paul.brain.ContainsKey(key)) //if key not in brain, replace key with most similar existing key
                 {
-                    Console.WriteLine("brain does not contain key:" + key);
+                    Console.WriteLine("brain does not contain key: " + key);
                     int minDist = int.MaxValue;
                     List<string> simStrings = new List<string>();
                     foreach(string s in paul.brain.Keys)
@@ -87,28 +87,29 @@ namespace Paul_2._0
                             
                             minDist = levenDist;
                             simStrings.Add(s);
-                            Console.WriteLine($"simstring: {s}, ({paul.brain[s][0]}), levenDist: {levenDist}");
+                            //Console.WriteLine($"simstr: {s}, ({paul.brain[s][0]}), levDist: {levenDist}");
                         }
                     }
                     key = simStrings[rand.Next(0, simStrings.Count-1)]; //replace key with any of the most similar strings to it
+                    Console.WriteLine("found key: " + key + " : " + paul.brain[key][0]);
                 }
 
                 string nextchar = paul.brain[key][rand.Next(0, paul.brain[key].Count - 1)];
 
-                Console.WriteLine(output);
-                Console.WriteLine("adding: " + nextchar);
+                Console.WriteLine("text: " + output + "\nadding: " + nextchar);
                 output += nextchar;
                 i++;
 
                 if (nextchar == ".")
                 {
-                    if(rand.Next(0, 2) == 1) is_done = true; //half the time end it when adding a period
+                    if(rand.Next(0, 1000) > endChance*1000) is_done = true; //half the time end it when adding a period
                     //output += ' ';
                 }
             }
 
 
-            Console.WriteLine("OUTPUT READY: " + output);
+            Console.WriteLine("\n\n-------------------------OUTPUT READY-------------------------\n");
+            Console.WriteLine(" " + output + "\n");
             return output;
         }
 

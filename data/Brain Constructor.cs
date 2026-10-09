@@ -39,7 +39,7 @@ namespace Paul_2._0
             List<string> answers = new List<string>();
             List<string> text = new List<string>();
 
-
+            
 
             foreach (string s in data)
             {
@@ -110,6 +110,13 @@ namespace Paul_2._0
             }
             using FileStream createStream = File.Create(Path.Combine(basePath, @"data\brain.json"));
             JsonSerializer.Serialize(createStream, paul);
+
+
+            string savePath = Path.Combine(basePath, @"data\save");
+            string configPath = Path.Combine(basePath, @"config.txt");
+            string saveconfigPath = Path.Combine(basePath, @"data\configsave");
+            File.WriteAllText(savePath, File.ReadAllText(dataPath));
+            File.WriteAllText(saveconfigPath, File.ReadAllText(configPath));
 
         }
     }
