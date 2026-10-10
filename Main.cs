@@ -46,6 +46,7 @@ namespace Paul_2._0
             string savePath = Path.Combine(basePath, @"data\save");
             string saveconfigPath = Path.Combine(basePath, @"data\configsave");
             string data = File.ReadAllText(savePath);
+            File.AppendAllText(savePath, ""); //make sure it exists
             string savedata = File.ReadAllText(dataPath);
             string saveconfigdata = File.ReadAllText(saveconfigPath); //i hate my life
 

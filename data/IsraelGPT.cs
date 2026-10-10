@@ -57,55 +57,131 @@ namespace Paul_2._0
                         }
                     }
                     query = simStrings[rand.Next(0, simStrings.Count - 1)];
+                    Console.WriteLine($"similar query found: {query}");
 
                 }
+                string value = "";
+                int x = 0;
+                while (true)
+                {
+                    int Index = rand.Next(0, paul.starts[query].Count);
+                    value = paul.starts[query][Index];
+                    if (!value.Contains('.')) break;
+                    x++;
+
+                    if(x > 20)
+                    {
+                        is_done = true;
+                        break;
+                    }
+                }
+                if(!value.Contains('.'))
+                    value += paul.brain[value][0];
+                output = value;
 
                 output = paul.starts[query][rand.Next(0, paul.starts[query].Count)];
             }
             else
             {
-                string value = paul.brain.Keys.ToArray()[rand.Next(0, paul.brain.Keys.Count)];
+                string value;
+                while (true)
+                {
+                    int startIndex = rand.Next(0, paul.starts.Keys.Count);
+                    string startKey = paul.starts.Keys.ToArray()[startIndex];
+                    int randNum = rand.Next(0, paul.starts[startKey].Count);
+                    value = paul.starts[startKey][randNum];
+                    if (!value.Contains('.')) break;
+                }
+
+                value = value + paul.brain[value][0];
                 output = value;
+                
             }
 
+
+
+            int trys = 0;
+            //main loop
             while (!is_done)
             {
-                string key = output.Substring(i, paul.Combobulation);
-                if(!paul.brain.ContainsKey(key)) //if key not in brain, replace key with most similar existing key
-                {
-                    Console.WriteLine("brain does not contain key: " + key);
-                    int minDist = int.MaxValue;
-                    List<string> simStrings = new List<string>();
-                    foreach(string s in paul.brain.Keys)
-                    {
+                Console.WriteLine($"output: {output}  i: {i}  combob: {paul.Combobulation}");
+                if (i >= 1000) break;
+                
+                string key = output.Substring(output.Length - paul.Combobulation, paul.Combobulation);
+                
 
-                        int levenDist = Levenshtein(key, s);
-                        if (levenDist <= minDist)
+                if (output[output.Length - 2] != '.') // to prevent strokes when starting new sentances
+                {
+                    if (!paul.brain.ContainsKey(key)) //if key not in brain, replace key with most similar existing key
+                    {
+                        Console.WriteLine("brain does not contain key: " + key);
+                        int minDist = int.MaxValue;
+                        List<string> simStrings = new List<string>();
+                        foreach (string s in paul.brain.Keys)
                         {
-                            if (levenDist < minDist)
-                                simStrings = new List<string>();
-                            
-                            minDist = levenDist;
-                            simStrings.Add(s);
-                            //Console.WriteLine($"simstr: {s}, ({paul.brain[s][0]}), levDist: {levenDist}");
+
+                            int levenDist = Levenshtein(key, s);
+                            if (levenDist <= minDist)
+                            {
+                                if (levenDist < minDist)
+                                    simStrings = new List<string>();
+
+                                minDist = levenDist;
+                                simStrings.Add(s);
+                                //Console.WriteLine($"simstr: {s}, ({paul.brain[s][0]}), levDist: {levenDist}");
+                            }
                         }
+                        key = simStrings[rand.Next(0, simStrings.Count - 1)]; //replace key with any of the most similar strings to it
+                        Console.WriteLine("found key: " + key + " : " + paul.brain[key][0]);
                     }
-                    key = simStrings[rand.Next(0, simStrings.Count-1)]; //replace key with any of the most similar strings to it
-                    Console.WriteLine("found key: " + key + " : " + paul.brain[key][0]);
+                }
+                else
+                {
+                    
+
+                    string value;
+                    while (true)
+                    {
+                        int startIndex = rand.Next(0, paul.starts.Keys.Count);
+                        string startKey = paul.starts.Keys.ToArray()[startIndex];
+                        int randNum = rand.Next(0, paul.starts[startKey].Count);
+                        value = paul.starts[startKey][randNum];
+                        if (!value.Contains('.')) break;
+                    }
+                    
+                    value = value + paul.brain[value][0];
+                    output += value;
+
+                    Console.WriteLine($"Starting new sentance: {value}");
+                    continue; //necessary
                 }
 
                 string nextchar = paul.brain[key][rand.Next(0, paul.brain[key].Count - 1)];
-
                 Console.WriteLine("text: " + output + "\nadding: " + nextchar);
+
+                if (output[output.Length - 2] == '.' && nextchar == ".")
+                {
+                    Console.WriteLine("Ejecting: adding sequencial punctuation.");
+                    if (trys >= 3)
+                    {
+                        Console.WriteLine("too many attempts. Ending response.");
+                        break;
+                    }
+                    trys++;
+                    continue;
+                }
+
                 output += nextchar;
                 i++;
 
-                if (nextchar == ".")
+                if (nextchar == "." || nextchar == "!" || nextchar == "?")
                 {
                     if(rand.Next(0, 1000) > endChance*1000) is_done = true; //half the time end it when adding a period
-                    //output += ' ';
+
+                    output += ' ';
                 }
             }
+
 
 
             Console.WriteLine("\n\n-------------------------OUTPUT READY-------------------------\n");
