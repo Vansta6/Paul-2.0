@@ -1,0 +1,7 @@
+To add data, go into the data folder and add text to the data.txt. Dont mess around with anything else in that folder
+To customize your paul, simply change the values in the Config.txt
+	smartness refers to the characters it can hold in "memory"
+	query seek is how many characters from a query paul can actually see, starts at end and works backwards.
+	stop chance refers to the chance a period will end a response.
+
+Have fun.
