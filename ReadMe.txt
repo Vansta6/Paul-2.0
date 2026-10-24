@@ -1,4 +1,4 @@
-#**PAUL:** the future of todays tommorow.
+# **PAUL:** the future of todays tommorow.
 ## What is paul?
 Paul is a markov text generator I built from complete scratch, which is the professional way of saying bad. It is preloaded with all of genesis, and I think the bee movie scrpt. Likely something else as well.
 The markov chain was invented my Andrey Markov in 1906 as a mathmatical system to predict a series of events, so you can use this system to your hearts content guilt free. The first one created was to predict whether shakespear would write a vowel or consonant next.
